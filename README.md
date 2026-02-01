@@ -1,121 +1,122 @@
-This project has been created as part of the 42 curriculum by seguler.
-libft
-Description
-Bu proje, 42 müfredatındaki ilk büyük C projesi olan libft çalışmasıdır.
-Amaç, C standard library (libc) içindeki birçok temel fonksiyonu sıfırdan yazarak kendi statik kütüphanemi (libft.a) oluşturmaktır.
-Bu proje sayesinde:
+# libft
 
-bellek yönetimi (malloc/free)
-pointer aritmetiği
-string işlemleri
-defensive programming
-edge case yönetimi (NULL, overflow, boş string, allocation fail)
-norm kuralları
+A custom C library implementation as part of the 42 curriculum.
 
-gibi konularda derinlemesine pratik kazanılmıştır.
-Bu kütüphane, ilerideki 42 projelerinde kullanılacak kişisel bir araç seti (toolkit) olarak tasarlanmıştır.
+## 📚 Description
 
-Detailed Library Description
-Part 1 — Libc Fonksiyonları
-Standart C fonksiyonlarının ft_ prefix'i ile yeniden yazılmış halleri:
-Karakter kontrolleri
+**libft** is the first major C project in the 42 curriculum. The goal is to recreate many essential functions from the C standard library (libc) from scratch and build a personal static library (`libft.a`).
 
-ft_isalpha — alfabetik karakter kontrolü
-ft_isdigit — rakam kontrolü
-ft_isalnum — alfanümerik karakter kontrolü
-ft_isascii — ASCII karakter kontrolü
-ft_isprint — yazdırılabilir karakter kontrolü
+Through this project, I gained hands-on experience with:
+- Memory management (`malloc`/`free`)
+- Pointer arithmetic
+- String operations
+- Defensive programming
+- Edge case handling (NULL, overflow, empty strings, allocation failures)
+- 42 Norm compliance
 
-String işlemleri
+This library serves as a personal toolkit for future 42 projects.
 
-ft_strlen — string uzunluğu
-ft_strchr — karakterin ilk konumu
-ft_strrchr — karakterin son konumu
-ft_strncmp — string karşılaştırma
-ft_strnstr — substring arama
-ft_atoi — string → integer dönüşümü
+---
 
-Memory işlemleri
+## 🛠️ Functions
 
-ft_memset — belleği belirtilen byte ile doldurur
-ft_bzero — belleği sıfırlar
-ft_memcpy — bellek kopyalama (overlap yok)
-ft_memmove — bellek kopyalama (overlap güvenli)
-ft_memchr — bellekte byte arama
-ft_memcmp — bellek karşılaştırma
+### Part 1 — Libc Functions
+Standard C functions reimplemented with `ft_` prefix:
 
-String kopyalama
+**Character checks:**
+- `ft_isalpha` — alphabetic character check
+- `ft_isdigit` — digit check
+- `ft_isalnum` — alphanumeric character check
+- `ft_isascii` — ASCII character check
+- `ft_isprint` — printable character check
 
-ft_strlcpy — güvenli string kopyalama
-ft_strlcat — güvenli string birleştirme
+**String operations:**
+- `ft_strlen` — string length
+- `ft_strchr` — locate first character occurrence
+- `ft_strrchr` — locate last character occurrence
+- `ft_strncmp` — compare strings
+- `ft_strnstr` — locate substring
+- `ft_atoi` — string to integer conversion
 
-Dönüşüm ve dinamik bellek
+**Memory operations:**
+- `ft_memset` — fill memory with a constant byte
+- `ft_bzero` — zero a byte string
+- `ft_memcpy` — copy memory area (no overlap)
+- `ft_memmove` — copy memory area (overlap-safe)
+- `ft_memchr` — scan memory for a byte
+- `ft_memcmp` — compare memory areas
 
-ft_toupper — büyük harfe çevirme
-ft_tolower — küçük harfe çevirme
-ft_calloc — bellek tahsisi ve sıfırlama
-ft_strdup — string kopyalama (dinamik)
+**String manipulation:**
+- `ft_strlcpy` — safe string copy
+- `ft_strlcat` — safe string concatenation
+- `ft_toupper` — convert to uppercase
+- `ft_tolower` — convert to lowercase
+- `ft_calloc` — allocate and zero memory
+- `ft_strdup` — duplicate string (dynamic)
 
+### Part 2 — Additional Functions
+Helper functions not in libc:
 
-Part 2 — Ek Fonksiyonlar
-Libc'de olmayan yardımcı fonksiyonlar:
+- `ft_substr` — extract substring
+- `ft_strjoin` — concatenate two strings
+- `ft_strtrim` — trim characters from string edges
+- `ft_split` — split string by delimiter (most complex function)
+- `ft_itoa` — integer to string conversion
 
-ft_substr — string'den parça çıkarır
-ft_strjoin — iki string'i birleştirir
-ft_strtrim — baştan ve sondan karakter temizler
-ft_split — delimiter'a göre string böler (en karmaşık fonksiyon)
-ft_itoa — integer → string dönüşümü
+**Functional programming:**
+- `ft_strmapi` — apply function to string with index
+- `ft_striteri` — iterate string with function
 
-Fonksiyonel programlama
+**File descriptor operations:**
+- `ft_putchar_fd` — output char to fd
+- `ft_putstr_fd` — output string to fd
+- `ft_putendl_fd` — output string + newline to fd
+- `ft_putnbr_fd` — output integer to fd
 
-ft_strmapi — string'e index + karakter parametreli fonksiyon uygular
-ft_striteri — string'e index + pointer parametreli fonksiyon uygular
-
-File descriptor fonksiyonları
-
-ft_putchar_fd — karakteri fd'ye yazar
-ft_putstr_fd — string'i fd'ye yazar
-ft_putendl_fd — string + newline'ı fd'ye yazar
-ft_putnbr_fd — integer'ı fd'ye yazar
-
-
-Part 3 — Linked List (Bonus)
-Bağlı liste (linked list) yapısı:
-ctypedef struct s_list
+### Part 3 — Linked List (Bonus)
+```c
+typedef struct s_list
 {
-    void *content;
-    struct s_list *next;
-} t_list;
-Fonksiyonlar:
+    void            *content;
+    struct s_list   *next;
+}   t_list;
+```
 
-ft_lstnew — yeni düğüm oluşturur
-ft_lstadd_front — listenin başına ekler
-ft_lstadd_back — listenin sonuna ekler
-ft_lstsize — liste uzunluğunu döndürür
-ft_lstlast — son düğümü döndürür
-ft_lstdelone — tek düğüm siler
-ft_lstclear — tüm listeyi temizler
-ft_lstiter — her düğüme fonksiyon uygular
-ft_lstmap — her düğüme fonksiyon uygulayarak yeni liste oluşturur
+**Functions:**
+- `ft_lstnew` — create new node
+- `ft_lstadd_front` — add node at beginning
+- `ft_lstadd_back` — add node at end
+- `ft_lstsize` — count list elements
+- `ft_lstlast` — return last node
+- `ft_lstdelone` — delete single node
+- `ft_lstclear` — delete entire list
+- `ft_lstiter` — apply function to each node
+- `ft_lstmap` — apply function and create new list
 
+---
 
-Instructions
-Compilation
-bash# Ana kütüphaneyi derle
+## 🚀 Installation & Usage
+
+### Compilation
+```bash
+# Compile the library
 make
 
-# Object dosyalarını temizle
+# Clean object files
 make clean
 
-# Tüm oluşturulan dosyaları sil
+# Remove all generated files
 make fclean
 
-# Yeniden derle
+# Recompile
 make re
-Makefile, tüm .c dosyalarını -Wall -Wextra -Werror bayraklarıyla derler ve libft.a statik kütüphanesini oluşturur.
-Usage
-Kütüphaneyi kendi projenizde kullanmak için:
-c#include "libft.h"
+```
+
+The Makefile compiles all `.c` files with `-Wall -Wextra -Werror` flags and creates the `libft.a` static library.
+
+### Usage Example
+```c
+#include "libft.h"
 
 int main(void)
 {
@@ -124,61 +125,71 @@ int main(void)
     free(str);
     return (0);
 }
-Derleme:
-bashcc main.c -L. -lft -o program
-Testing
-Proje Windows ortamında geliştirildi, Linux'ta test edildi.
-Kullanılan test araçları:
-bash# Tripouille tester
-make -C ~/libftTester
+```
 
-# Francinette
-francinette   
+**Compile with libft:**
+```bash
+cc main.c -L. -lft -o program
+```
 
-Test sürecinde özellikle şu noktalara dikkat edildi:
+---
 
-NULL pointer kontrolleri
-Malloc başarısızlık senaryoları
-Edge case'ler (boş string, INT_MIN, INT_MAX)
-Memory leak kontrolleri
+## ✅ Testing
 
+Developed on Windows, tested on Linux.
 
-Resources
-Dokümantasyon
+**Test tools used:**
+- [Tripouille's libft tester](https://github.com/Tripouille/libftTester)
+- [Francinette](https://github.com/xicodomingues/francinette)
 
-Man Pages — Her fonksiyonun resmi dokümantasyonu (temel kaynak)
-C Programming Language (K&R) — C dilinin temelleri
-GNU C Library Documentation — Libc referansı
-Arkadaşlarla tartışmalar — Özellikle karmaşık fonksiyonlar için peer-learning
+**Testing focused on:**
+- NULL pointer handling
+- Malloc failure scenarios
+- Edge cases (empty strings, `INT_MIN`, `INT_MAX`)
+- Memory leak detection
 
-AI Kullanımı
-Subject PDF'i İngilizce olduğu için ve C dilinde yeni başladığım için ChatGPT ve Claude'u yoğun şekilde kullandım:
-Kullanım alanları:
+---
 
-Fonksiyon açıklamaları: Subject'teki İngilizce gereksinimleri Türkçe anlamak için kullandım. Her fonksiyonun ne yaptığını, parametrelerinin anlamını, dönüş değerlerini Türkçe açıklatarak kavradım.
-Kavramsal farklılıklar: memmove vs memcpy, strlcpy vs strcpy, calloc vs malloc gibi benzer fonksiyonlar arasındaki farkları Türkçe örneklerle öğrendim.
-Edge case analizi: Hangi uç durumları test etmem gerektiğini Türkçe açıklamalarla anladım:
+## 📖 Resources
 
-NULL pointer kontrolü
-Boş string durumları
-Integer overflow (INT_MIN, INT_MAX)
-Malloc başarısızlık senaryoları
+- **Man pages** — official documentation for each function
+- **The C Programming Language (K&R)** — C fundamentals
+- **GNU C Library Documentation** — libc reference
+- Peer discussions and collaborative learning
 
+---
 
-Debugging yardımı: ft_split ve ft_lstmap gibi karmaşık fonksiyonlardaki bellek yönetimi hatalarını anlamak için Türkçe açıklamalar aldım. AI'a direkt "kodu yaz" demedim, "bu mantık doğru mu?" veya "hangi durumları kontrol etmeliyim?" sorularını sordum.
-Algoritma mantığı: Özellikle ft_split'in delimiter'a göre string ayırma mantığını ve linked list fonksiyonlarının pointer manipülasyonunu Türkçe örneklerle kavradım.
-README formatı: Bu dokümantasyonu 42 subject gereksinimlerine uygun şekilde yapılandırmak için kullandım.
+## 🤖 AI Usage Note
 
-Önemli: Hiçbir fonksiyonun kodu AI tarafından yazılmadı. Tüm implementasyonlar benim tarafımdan manuel olarak yazıldı. AI'ı sadece konseptleri anlamak, Türkçe açıklamalar almak ve öğrenme sürecimi hızlandırmak için kullandım.
+Since the 42 subject is in English and I was new to C, I extensively used ChatGPT and Claude for:
+- **Understanding requirements** in Turkish
+- **Conceptual differences** (e.g., `memmove` vs `memcpy`, `calloc` vs `malloc`)
+- **Edge case analysis** (NULL checks, overflow, allocation failures)
+- **Debugging assistance** for complex functions like `ft_split` and `ft_lstmap`
+- **Algorithm logic** clarification
 
-Technical Notes
+**Important:** No function code was written by AI. All implementations were manually coded by me. AI was used only to understand concepts, get Turkish explanations, and accelerate my learning process.
 
-Norm v3 kurallarına tam uyumlu
-25 satır limiti ve fonksiyon sayısı kısıtlamalarına uyuldu
-Global değişken yok — tüm değişkenler lokal/static
-Memory leak yok — tüm malloc'lar kontrol edildi ve free edildi
-Platform notları:
+---
 
-strlcpy ve strlcat GNU libc'de varsayılan değil (BSD'de var)
-calloc: nmemb veya size = 0 ise free'e güvenli pointer döner
-# libft
+## 📝 Technical Notes
+
+- ✅ Fully compliant with **42 Norm v3**
+- ✅ 25-line limit and function count restrictions respected
+- ✅ No global variables — all variables are local/static
+- ✅ No memory leaks — all `malloc`s checked and `free`d
+- Platform notes:
+  - `strlcpy` and `strlcat` are not in GNU libc by default (BSD functions)
+  - `calloc`: returns safe-to-free pointer if `nmemb` or `size` = 0
+
+---
+
+## 👤 Author
+
+**seguler** — 42 Student
+
+---
+
+## 📄 License
+
+This project is part of the 42 school curriculum.
